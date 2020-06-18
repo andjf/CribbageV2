@@ -1,0 +1,19 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+.chosePlayerButton {
+	transition-duration: 0.4s;			
+	background-color: green;
+	color: white;
+}
+
+.chosePlayerButton:hover {
+	background-color: white;
+	color: black;
+}
