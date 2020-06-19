@@ -1,5 +1,15 @@
+/** @class Card representing a card. */
 class Card {
 
+    /**
+    * Creates an instance of Card
+    *
+    * @constructor
+    * @author: andjf
+    * @param {string} c the string representation of the card ex. "5H"
+    * @param {number} x the initial x position of the card (optional)
+    * @param {number} y the initial y position of the card (optional)
+    */
     constructor(c, x = 0, y = 0) {
         this.card = c;
         this.position = createVector(x, y);
@@ -10,8 +20,11 @@ class Card {
         this.tempHighlighted = false;
     }
 
-    //Returns an integer amount that represents how much the card 
-    //is worth according to the rules of Cribbage
+    /**
+    * Returns the value of the card according to the rules of Cribbage
+    *
+    * @return {number} the value of the card as if you were counting it in pegging [1, 10]
+    */
     value() {
         let valueLiteral = this.card.substring(0, this.card.length == 2 ? 1 : 2);
         if (valueLiteral.toLowerCase().charAt(0) == "a") {
@@ -23,6 +36,11 @@ class Card {
         return parseInt(valueLiteral);
     }
 
+    /**
+    * Returns the raw value of the card
+    *
+    * @return {number} the raw value of the card accounting for face cards [1, 13]
+    */
     rawValue() {
         if (this.value() < 10) {
             return this.value();
@@ -39,7 +57,11 @@ class Card {
         }
     }
 
-    //Returns a String that represents the name of the card in English
+    /**
+    * Returns the name of the card
+    *
+    * @return {string} the name of the card as a string ex. "Jack" or "4"
+    */
     valueName() {
         if (this.value() > 1 && this.value() < 10) {
             return this.value().toString();
@@ -62,6 +84,11 @@ class Card {
         }
     }
 
+    /**
+    * Returns the shortened name of the card
+    *
+    * @return {string} the shortened name of the card as a string ex. "J" or "10"
+    */
     valueNameShort() {
         if (isNaN(this.valueName())) {
             return this.valueName().charAt(0);
@@ -69,9 +96,13 @@ class Card {
         return this.valueName();
     }
 
-    //Returns a String that represents the suit of the card in English
+    /**
+    * Returns the suit of the card
+    *
+    * @return {string} the suit of the card ex. "Spades"
+    */
     suit() {
-        switch (this.card.toLowerCase().substring(this.card.length == 2 ? 1 : 2)) {
+        switch (this.card.toLowerCase().substring(this.card.length == 2 ? 1 : 2).charAt(0)) {
             case "s":
                 return "Spades";
             case "h":
@@ -85,8 +116,13 @@ class Card {
         }
     }
 
+    /**
+    * Returns the suit symbol of the card
+    *
+    * @return {string} the suit symbol of the card ex. "♠"
+    */
     suitShort() {
-        switch (this.card.toLowerCase().substring(this.card.length == 2 ? 1 : 2)) {
+        switch (this.card.toLowerCase().substring(this.card.length == 2 ? 1 : 2).charAt(0)) {
             case "s":
                 return "♠";
             case "h":
@@ -100,14 +136,30 @@ class Card {
         }
     }
 
+    /**
+    * Returns the card represented as a string
+    *
+    * @return {string} the card as a string ex. "Queen of Spades"
+    */
     print() {
         return this.valueName() + " of " + this.suit();
     }
 
+    /**
+    * Returns the card represented as a shortened string
+    *
+    * @return {string} the card as a shortened string ex. "Q♠"
+    */
     printShort() {
         return this.valueName() + this.suitShort();
     }
-
+    
+    /**
+    * Updates the card based on its "highlighted" status
+    *
+    * @param {number} basicY The y position of the card if it was not highlighted
+    * @param {number} amountMove The amount that the card should move if highlighted
+    */
     update(basicY, amountMove) {
         if (this.isHighlighted || this.tempHighlighted) {
             this.highlightPercent += (1 - this.highlightPercent) * 0.1;
@@ -119,6 +171,11 @@ class Card {
         this.position.y = basicY - (this.highlightPercent * amountMove);
     }
 
+    /**
+    * Returns if the mouse is currently over this card
+    *
+    * @return {boolean} True if the mouse is over the card, false if the mouse is not
+    */
     mouseIsOverCard() {
         if (mouseX >= this.position.x - this.dimension.x / 2 && mouseX <= this.position.x + this.dimension.x / 2) {
             if (mouseY >= this.position.y - this.dimension.y / 2 && mouseY <= this.position.y + this.dimension.y / 2) {
@@ -128,6 +185,9 @@ class Card {
         return false;
     }
 
+    /**
+    * Shows the card according to its position, angle, highlighted status, and dimensions
+    */
     show() {
         fill(255);
         rectMode(CENTER);
