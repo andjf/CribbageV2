@@ -129,13 +129,17 @@ class Card {
   }
 
   show() {
-    noStroke();
     fill(255);
     rectMode(CENTER);
     push();
     translate(this.position.x, this.position.y);
     rotate(this.theta);
+    if(this.isHighlighted) {
+      stroke(255, 230, 43, 200);
+      strokeWeight(width / 200);
+    }
     rect(0, 0, this.dimension.x, this.dimension.y, this.dimension.x / 12);
+    noStroke();
     fill(color(int((this.suitShort() == "♥" || this.suitShort() == "♦")) * 255, 0, 0));
     textAlign(CENTER, CENTER);
     textSize(this.dimension.x / 2);
