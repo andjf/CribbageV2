@@ -37,7 +37,7 @@ function setup() {
 
 function createConfirmButton() {
   let toReturn = createButton("Confirm");
-  let boarderThickness = width / 100;
+  let boarderThickness = width / 1000;
   toReturn.position(choseNumberOfPlayerButtonPadding, choseNumberOfPlayerButtonPadding);
   toReturn.style("width", (width - (choseNumberOfPlayerButtonPadding * 2)).toString() + "px");
   toReturn.style("height", ((height / 6) - choseNumberOfPlayerButtonPadding * 2).toString() + "px");
