@@ -17,7 +17,7 @@ function setup() {
     console.log(width, height);
     angleMode(DEGREES);
     deck = new Deck(true);
-    hand = new Deck(false);
+    hand = new Deck();
     phaseStartFrame = new Array(4).fill(-1);
     phase = 0;
 
@@ -343,7 +343,7 @@ class HandDecider {
                 restOfCards.removeCard(c[i]);
             }
             for (let i = 0; i < c.length; i++) {
-                let handWithoutCard = new Deck(false);
+                let handWithoutCard = new Deck();
                 for (let add = 0; add < c.length; add++) {
                     handWithoutCard.addCard(c[add]);
                 }
@@ -366,7 +366,7 @@ class HandDecider {
             let manualCounter = 0;
             for (let first = 0; first < c.length - 1; first++) {
                 for (let second = first + 1; second < c.length; second++) {
-                    let handWithoutCards = new Deck(false);
+                    let handWithoutCards = new Deck();
                     for (let j = 0; j < c.length; j++) {
                         handWithoutCards.addCard(c[j]);
                     }
@@ -434,7 +434,7 @@ class HandScorer {
                 toReturn.splice(i, 0, hand.cards[current]);
             }
         }
-        let sorted = new Deck(false);
+        let sorted = new Deck();
         for (let i = 0; i < toReturn.length; i++) {
             sorted.addCard(toReturn[i]);
         }
